@@ -10,15 +10,15 @@ Backend implements the RAG (Retrieval-Augmented Generation) pattern: retrieving 
 
 ```
 File uploaded via POST /api/documents/upload
-      **↓**
+      ↓
 Apache Tika extracts raw text (PDF, DOCX, PPTX, TXT)
-      **↓**
+      ↓
 Text is split into chunks (~800 tokens each)
-      **↓**
+      ↓
 Each chunk is embedded (converted into a vector) via Gemini's embedding model
-      **↓**
+      ↓
 Chunks + vectors are stored in an in-memory vector store
-      **↓**
+      ↓
 File metadata (name, upload time) is saved to PostgreSQL
 ```
 
@@ -26,15 +26,15 @@ File metadata (name, upload time) is saved to PostgreSQL
 
 ```
 Question sent via POST /api/documents/{id}/query
-      **↓**
+      ↓
 Question is embedded into a vector
-      **↓**
+      ↓
 Similarity search finds the top 5 most relevant chunks (filtered to that document)
-      **↓**
+      ↓
 Chunks are joined into a "context" block
-      **↓**
+      ↓
 A prompt (instructions + context + question) is sent to Gemini's chat model
-      **↓**
+      ↓
 Model generates a grounded answer, returned as JSON
 ```
 
